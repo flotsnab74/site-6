@@ -286,9 +286,28 @@ p { line-height: 1.6; margin: 0; }
 .card {
   background: var(--white);
   padding: 34px 30px;
-  transition: background 0.15s ease;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.15s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
-.card:hover { background: var(--steel-100); }
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 0%;
+  height: 3px;
+  background: var(--copper-500);
+  transition: width 0.3s ease;
+}
+.card:hover {
+  background: var(--steel-100);
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(23,26,28,0.14);
+  z-index: 2;
+}
+.card:hover::before { width: 100%; }
+.num-card .num { transition: text-shadow 0.25s ease; }
+.num-card:hover .num { text-shadow: 0 0 14px rgba(184,128,74,0.5); }
 .card .icon { color: var(--copper-500); margin-bottom: 20px; }
 .card h3 { font-size: 1.3rem; margin-bottom: 12px; color: var(--ink-900); }
 .card-photo{ width:100%; height:140px; object-fit:cover; border-radius:3px; margin-bottom:16px; display:block; }
