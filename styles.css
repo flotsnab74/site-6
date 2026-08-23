@@ -27,7 +27,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+html { scroll-behavior: smooth; overflow-x: clip; width: 100%; }
 
 body {
   margin: 0;
@@ -35,7 +35,7 @@ body {
   color: var(--ink-900);
   background: var(--white);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
 }
 
@@ -377,6 +377,57 @@ p { line-height: 1.6; margin: 0; }
 .process-grid-8 .process-step h3{ font-size:1.05rem; margin:12px 0 8px; }
 .process-grid-8 .process-step p{ font-size:0.88rem; }
 
+/* ---------------------------------------------------------------- */
+/* Sticky-scroll process section — "Как это работает" (homepage).    */
+/* Left column (title + progress list) stays pinned while the right  */
+/* column scrolls through the 8 steps. sticky-process.js toggles     */
+/* the "is-active" class on whichever step is currently in view.     */
+/* Nothing here depends on JS to be readable — without it every step */
+/* is still fully visible, just without the copper highlight.        */
+/* ---------------------------------------------------------------- */
+.sticky-process {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.sticky-process-aside { position: sticky; top: 104px; }
+.sticky-process-aside h2 { margin: 14px 0 32px; }
+.sticky-progress { list-style: none; padding: 0; margin: 0; border-left: 2px solid var(--graphite-700); }
+.sticky-progress-item {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 12px 0 12px 20px;
+  margin-left: -2px;
+  border-left: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+.sticky-progress-num, .sticky-progress-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--mist-400);
+  transition: color 0.3s ease;
+}
+.sticky-progress-label { font-family: var(--font-body); font-size: 0.88rem; }
+.sticky-progress-item.is-active { border-left-color: var(--copper-500); }
+.sticky-progress-item.is-active .sticky-progress-num { color: var(--copper-400); }
+.sticky-progress-item.is-active .sticky-progress-label { color: var(--white); }
+
+.sticky-process-steps { display: flex; flex-direction: column; }
+.sticky-step {
+  padding: 48px 24px 48px 28px;
+  border-bottom: 1px dashed var(--graphite-700);
+  border-left: 3px solid transparent;
+  transition: border-color 0.4s ease, background 0.4s ease;
+}
+.sticky-step:first-child { padding-top: 4px; }
+.sticky-step:last-child { border-bottom: none; }
+.sticky-step.is-active { border-left-color: var(--copper-500); background: rgba(184,128,74,0.05); }
+.sticky-step .process-num { font-family: var(--font-mono); color: var(--copper-400); font-size: 0.85rem; letter-spacing: 0.08em; }
+.sticky-step h3 { font-size: 1.4rem; margin: 14px 0 12px; }
+.sticky-step p { color: var(--mist-200); font-size: 1rem; max-width: 54ch; }
+
 
 
 /* Industries */
@@ -637,6 +688,8 @@ p { line-height: 1.6; margin: 0; }
   .nav-toggle { display: block; }
   .card-grid { grid-template-columns: 1fr; }
   .tech-grid-7 .card { grid-column: auto; }
+  .sticky-process { grid-template-columns: 1fr; gap: 32px; }
+  .sticky-process-aside { position: static; }
   .process-grid { grid-template-columns: 1fr; gap: 28px; }
   .process-step:not(:last-child) { border-right: none; margin-right: 0; border-bottom: 1px dashed var(--graphite-700); padding-bottom: 24px; }
   .benefit-grid { grid-template-columns: 1fr; }

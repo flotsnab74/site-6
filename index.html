@@ -167,21 +167,33 @@
   </div>
 </section>
 
-<section class="section section-darkest reveal">
+<section class="section section-darkest">
   <div class="container">
-    <div class="section-head">
-      <div class="dim-line no-rule">Как это работает</div>
-      <h2>От чертежа до детали на складе в России</h2>
-    </div>
-    <div class="process-grid-8">
-      <div class="process-step"><div class="process-num">01 —</div><h3>Получение запроса</h3><p>Принимаем чертёжи STEP, STP, PDF, DWG, DXF, ZIP и уточняем требования.</p></div>
-      <div class="process-step"><div class="process-num">02 —</div><h3>Проверка чертежей</h3><p>Инженер анализирует технологичность, допуски, материал, объём партии и варианты снижения себестоимости.</p></div>
-      <div class="process-step"><div class="process-num">03 —</div><h3>Подбор завода в Китае</h3><p>Линия подбирается по технологии, материалу, точности и требованиям к контролю — из сети цехов.</p></div>
-      <div class="process-step"><div class="process-num">04 —</div><h3>Коммерческое предложение</h3><p>Стоимость, срок, условия контроля и доставки — одной ценой, без скрытых доплат.</p></div>
-      <div class="process-step"><div class="process-num">05 —</div><h3>Изготовление образцов</h3><p>Опытная партия для проверки геометрии, покрытия и сборки перед запуском серии.</p></div>
-      <div class="process-step"><div class="process-num">06 —</div><h3>Серийное производство</h3><p>Запуск партии с межоперационным контролем и фиксацией критичных параметров.</p></div>
-      <div class="process-step"><div class="process-num">07 —</div><h3>Контроль качества</h3><p>Проверка размеров, резьб, покрытия, внешнего вида и комплектности перед отгрузкой.</p></div>
-      <div class="process-step"><div class="process-num">08 —</div><h3>Поставка в Россию</h3><p>Упаковка, маркировка, таможенное оформление и доставка на ваш склад.</p></div>
+    <div class="sticky-process">
+      <div class="sticky-process-aside">
+        <div class="dim-line no-rule">Как это работает</div>
+        <h2>От чертежа до детали на складе в России</h2>
+        <ol class="sticky-progress">
+          <li class="sticky-progress-item" data-step="1"><span class="sticky-progress-num">01</span><span class="sticky-progress-label">Получение запроса</span></li>
+          <li class="sticky-progress-item" data-step="2"><span class="sticky-progress-num">02</span><span class="sticky-progress-label">Проверка чертежей</span></li>
+          <li class="sticky-progress-item" data-step="3"><span class="sticky-progress-num">03</span><span class="sticky-progress-label">Подбор завода</span></li>
+          <li class="sticky-progress-item" data-step="4"><span class="sticky-progress-num">04</span><span class="sticky-progress-label">Коммерческое предложение</span></li>
+          <li class="sticky-progress-item" data-step="5"><span class="sticky-progress-num">05</span><span class="sticky-progress-label">Изготовление образцов</span></li>
+          <li class="sticky-progress-item" data-step="6"><span class="sticky-progress-num">06</span><span class="sticky-progress-label">Серийное производство</span></li>
+          <li class="sticky-progress-item" data-step="7"><span class="sticky-progress-num">07</span><span class="sticky-progress-label">Контроль качества</span></li>
+          <li class="sticky-progress-item" data-step="8"><span class="sticky-progress-num">08</span><span class="sticky-progress-label">Поставка в Россию</span></li>
+        </ol>
+      </div>
+      <div class="sticky-process-steps">
+        <div class="sticky-step" data-step="1"><div class="process-num">01 —</div><h3>Получение запроса</h3><p>Принимаем чертёжи STEP, STP, PDF, DWG, DXF, ZIP и уточняем требования.</p></div>
+        <div class="sticky-step" data-step="2"><div class="process-num">02 —</div><h3>Проверка чертежей</h3><p>Инженер анализирует технологичность, допуски, материал, объём партии и варианты снижения себестоимости.</p></div>
+        <div class="sticky-step" data-step="3"><div class="process-num">03 —</div><h3>Подбор завода в Китае</h3><p>Линия подбирается по технологии, материалу, точности и требованиям к контролю — из сети цехов.</p></div>
+        <div class="sticky-step" data-step="4"><div class="process-num">04 —</div><h3>Коммерческое предложение</h3><p>Стоимость, срок, условия контроля и доставки — одной ценой, без скрытых доплат.</p></div>
+        <div class="sticky-step" data-step="5"><div class="process-num">05 —</div><h3>Изготовление образцов</h3><p>Опытная партия для проверки геометрии, покрытия и сборки перед запуском серии.</p></div>
+        <div class="sticky-step" data-step="6"><div class="process-num">06 —</div><h3>Серийное производство</h3><p>Запуск партии с межоперационным контролем и фиксацией критичных параметров.</p></div>
+        <div class="sticky-step" data-step="7"><div class="process-num">07 —</div><h3>Контроль качества</h3><p>Проверка размеров, резьб, покрытия, внешнего вида и комплектности перед отгрузкой.</p></div>
+        <div class="sticky-step" data-step="8"><div class="process-num">08 —</div><h3>Поставка в Россию</h3><p>Упаковка, маркировка, таможенное оформление и доставка на ваш склад.</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -247,5 +259,6 @@
   }
 </script>
 <script src="reveal.js" defer></script>
+<script src="sticky-process.js" defer></script>
 </body>
 </html>
