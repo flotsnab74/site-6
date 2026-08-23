@@ -70,8 +70,9 @@
       <div class="qb-progress">
         <div class="qb-progress-step is-active" data-step="1"><div class="qb-progress-bar"></div><span class="qb-progress-label">01 Технология</span></div>
         <div class="qb-progress-step" data-step="2"><div class="qb-progress-bar"></div><span class="qb-progress-label">02 Материал</span></div>
-        <div class="qb-progress-step" data-step="3"><div class="qb-progress-bar"></div><span class="qb-progress-label">03 Партия</span></div>
-        <div class="qb-progress-step" data-step="4"><div class="qb-progress-bar"></div><span class="qb-progress-label">04 Контакты</span></div>
+        <div class="qb-progress-step" data-step="3"><div class="qb-progress-bar"></div><span class="qb-progress-label">03 Покрытие</span></div>
+        <div class="qb-progress-step" data-step="4"><div class="qb-progress-bar"></div><span class="qb-progress-label">04 Партия</span></div>
+        <div class="qb-progress-step" data-step="5"><div class="qb-progress-bar"></div><span class="qb-progress-label">05 Контакты</span></div>
       </div>
 
       <div class="qb-panel is-active" data-panel="1">
@@ -104,6 +105,19 @@
       </div>
 
       <div class="qb-panel" data-panel="3">
+        <h3 class="qb-question">Нужно финишное покрытие?</h3>
+        <div class="qb-options qb-options-grid">
+          <button type="button" class="qb-option" data-field="coating" data-value="Анодирование">Анодирование</button>
+          <button type="button" class="qb-option" data-field="coating" data-value="Гальваника (цинк, никель)">Гальваника<span>Цинк, никель</span></button>
+          <button type="button" class="qb-option" data-field="coating" data-value="Порошковая окраска">Порошковая окраска</button>
+          <button type="button" class="qb-option" data-field="coating" data-value="Полировка и шлифовка">Полировка и шлифовка</button>
+          <button type="button" class="qb-option" data-field="coating" data-value="Другое / уточню с менеджером">Другое<span>Уточню с менеджером</span></button>
+          <button type="button" class="qb-option" data-field="coating" data-value="Без покрытия">Без покрытия<span>Пропустить этот шаг</span></button>
+        </div>
+        <div class="qb-nav"><button type="button" class="qb-back">← Назад</button></div>
+      </div>
+
+      <div class="qb-panel" data-panel="4">
         <h3 class="qb-question">Какой объём партии?</h3>
         <div class="qb-options qb-options-list">
           <button type="button" class="qb-option" data-field="batch" data-value="1–10 шт">1–10 шт<span>Прототип или образец</span></button>
@@ -114,19 +128,27 @@
         <div class="qb-nav"><button type="button" class="qb-back">← Назад</button></div>
       </div>
 
-      <div class="qb-panel" data-panel="4">
+      <div class="qb-panel" data-panel="5">
         <h3 class="qb-question">Остался последний шаг</h3>
         <div class="qb-summary" id="qbSummary"></div>
         <form id="quoteForm" class="form-grid" onsubmit="return false;">
-          <div class="form-field"><label>Имя</label><input type="text" required></div>
-          <div class="form-field"><label>Компания</label><input type="text"></div>
-          <div class="form-field"><label>Email</label><input type="email" required></div>
-          <div class="form-field"><label>Телефон</label><input type="tel"></div>
-          <div class="form-field full"><label>Чертёж (PDF, STEP, DWG)</label><input type="file"></div>
-          <div class="form-field full"><label>Комментарий</label><textarea rows="3"></textarea></div>
+          <input type="hidden" name="Технология" id="hf-tech">
+          <input type="hidden" name="Материал" id="hf-material">
+          <input type="hidden" name="Покрытие" id="hf-coating">
+          <input type="hidden" name="Объём партии" id="hf-batch">
+          <input type="hidden" name="_subject" value="Новая заявка с сайта — Конструктор ТЗ">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="form-field"><label>Имя</label><input type="text" name="Имя" required></div>
+          <div class="form-field"><label>Компания</label><input type="text" name="Компания"></div>
+          <div class="form-field"><label>Email</label><input type="email" name="Email" required></div>
+          <div class="form-field"><label>Телефон</label><input type="tel" name="Телефон"></div>
+          <div class="form-field full"><label>Чертёж (PDF, STEP, DWG)</label><input type="file" name="Чертёж"></div>
+          <div class="form-field full"><label>Комментарий</label><textarea name="Комментарий" rows="3"></textarea></div>
           <div class="form-field full">
             <button type="submit" class="btn btn-primary" id="quoteSubmit" style="align-self:flex-start;">Отправить заявку</button>
-            <p class="form-note">Или напишите напрямую: sales@precision-mw.ru</p>
+            <p class="form-note" id="qbFormNote">Или напишите напрямую: sales@precision-mw.ru</p>
           </div>
         </form>
         <div class="qb-nav"><button type="button" class="qb-back">← Назад</button></div>
@@ -135,7 +157,7 @@
 
     <div class="form-success" id="formSuccess">
       <h3>Заявка принята</h3>
-      <p>Демо-форма: письмо реально никуда не отправлено. Чтобы форма работала по-настоящему, нужно подключить сервис отправки (обсудим отдельно).</p>
+      <p>Мы получили вашу заявку и свяжемся с вами в ближайшее время.</p>
     </div>
   </div>
 </section>
@@ -190,9 +212,10 @@
   var qb = document.getElementById('quoteBuilder');
   if (!qb) return;
 
-  var state = { tech: null, material: null, batch: null };
+  var state = { tech: null, material: null, coating: null, batch: null };
   var panels = qb.querySelectorAll('.qb-panel');
   var progressSteps = qb.querySelectorAll('.qb-progress-step');
+  var TOTAL_STEPS = panels.length;
 
   function goToStep(n) {
     panels.forEach(function (p) {
@@ -203,7 +226,7 @@
       s.classList.toggle('is-active', stepNum === n);
       s.classList.toggle('is-done', stepNum < n);
     });
-    if (n === 4) renderSummary();
+    if (n === TOTAL_STEPS) renderSummary();
   }
 
   // Один клик по варианту — выбор фиксируется и конструктор сам
@@ -233,8 +256,8 @@
   // клик по любому пункту сводки возвращает назад и даёт поправить.
   function renderSummary() {
     var summary = document.getElementById('qbSummary');
-    var labels = { tech: 'Технология', material: 'Материал', batch: 'Партия' };
-    var order = [['tech', 1], ['material', 2], ['batch', 3]];
+    var labels = { tech: 'Технология', material: 'Материал', coating: 'Покрытие', batch: 'Партия' };
+    var order = [['tech', 1], ['material', 2], ['coating', 3], ['batch', 4]];
     var html = '';
     order.forEach(function (pair) {
       var field = pair[0], stepNum = pair[1];
@@ -247,13 +270,62 @@
     summary.querySelectorAll('.qb-summary-item').forEach(function (chip) {
       chip.addEventListener('click', function () { goToStep(parseInt(chip.dataset.jump, 10)); });
     });
+
+    // Синхронизируем выбор конструктора со скрытыми полями формы,
+    // чтобы они попали в письмо со всеми деталями заявки.
+    document.getElementById('hf-tech').value = state.tech || '';
+    document.getElementById('hf-material').value = state.material || '';
+    document.getElementById('hf-coating').value = state.coating || '';
+    document.getElementById('hf-batch').value = state.batch || '';
   }
 })();
 
-document.getElementById('quoteForm').addEventListener('submit', function(e){
+// Отправка заявки: письмо на почту через FormSubmit (без своего сервера)
+// плюс попытка продублировать в Telegram через собственную функцию
+// /api/notify (токен бота хранится в защищённых настройках Vercel,
+// а не в коде страницы). Если Telegram ещё не настроен — письмо всё
+// равно уходит, ошибка Telegram-части никак на это не влияет.
+document.getElementById('quoteForm').addEventListener('submit', function (e) {
   e.preventDefault();
-  document.getElementById('quoteBuilder').style.display = 'none';
-  document.getElementById('formSuccess').classList.add('show');
+  var form = e.target;
+  var submitBtn = document.getElementById('quoteSubmit');
+  var note = document.getElementById('qbFormNote');
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Отправка…';
+
+  var formData = new FormData(form);
+
+  fetch('https://formsubmit.co/ajax/ik_technology@mail.ru', {
+    method: 'POST',
+    headers: { 'Accept': 'application/json' },
+    body: formData
+  })
+    .then(function (res) {
+      if (!res.ok) throw new Error('FormSubmit error: ' + res.status);
+      return res.json();
+    })
+    .then(function () {
+      document.getElementById('quoteBuilder').style.display = 'none';
+      document.getElementById('formSuccess').classList.add('show');
+
+      // Дублируем в Telegram — необязательно для успеха заявки.
+      var payload = {};
+      formData.forEach(function (value, key) {
+        if (key !== 'Чертёж' && typeof value === 'string') payload[key] = value;
+      });
+      fetch('/api/notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(function () { /* Telegram не настроен или недоступен — не критично */ });
+    })
+    .catch(function () {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Отправить заявку';
+      note.textContent = 'Не получилось отправить автоматически. Напишите напрямую: sales@precision-mw.ru';
+      note.style.color = 'var(--copper-400)';
+    });
 });
 </script>
 <script src="reveal.js" defer></script>
