@@ -789,7 +789,7 @@ p { line-height: 1.6; margin: 0; }
   padding: 48px 0 40px;
   background-image: linear-gradient(180deg, rgba(23,26,28,.18) 0%, rgba(23,26,28,.55) 60%, rgba(23,26,28,.92) 100%), var(--hero-bg);
   background-size: cover;
-  background-position: center;
+  background-position: var(--hero-pos, center);
   color: var(--white);
 }
 .service-hero .eyebrow { text-shadow: 0 1px 10px rgba(0,0,0,.6); }
