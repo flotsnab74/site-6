@@ -325,7 +325,7 @@ p { line-height: 1.6; margin: 0; }
    baked in so the text stays readable. Photo comes from the
    --tech-bg custom property set inline on each card. */
 .num-card { background-color: var(--white); }
-.num-card h3, .num-card p { position: relative; z-index: 1; transition: color 0.3s ease; }
+.num-card h3, .num-card p, .num-card a { position: relative; z-index: 1; transition: color 0.3s ease; }
 .num-card::after {
   content: "";
   position: absolute;
@@ -341,6 +341,7 @@ p { line-height: 1.6; margin: 0; }
 .num-card:hover::after { opacity: 1; }
 .num-card:hover h3 { color: #fff; }
 .num-card:hover p { color: rgba(255,255,255,.85); }
+.num-card:hover a { color: var(--copper-300, #dba876); }
 .card .icon { color: var(--copper-500); margin-bottom: 20px; }
 .card h3 { font-size: 1.3rem; margin-bottom: 12px; color: var(--ink-900); }
 .card-photo{ width:100%; height:140px; object-fit:cover; border-radius:3px; margin-bottom:16px; display:block; }
