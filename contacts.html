@@ -131,7 +131,7 @@
       <div class="qb-panel" data-panel="5">
         <h3 class="qb-question">Остался последний шаг</h3>
         <div class="qb-summary" id="qbSummary"></div>
-        <form id="quoteForm" class="form-grid" onsubmit="return false;">
+        <form id="quoteForm" class="form-grid" action="https://formsubmit.co/ik_technology@mail.ru" method="POST" enctype="multipart/form-data">
           <input type="hidden" name="Технология" id="hf-tech">
           <input type="hidden" name="Материал" id="hf-material">
           <input type="hidden" name="Покрытие" id="hf-coating">
@@ -139,12 +139,13 @@
           <input type="hidden" name="_subject" value="Новая заявка с сайта — Конструктор ТЗ">
           <input type="hidden" name="_template" value="table">
           <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" id="hf-next" value="">
           <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
           <div class="form-field"><label>Имя</label><input type="text" name="Имя" required></div>
           <div class="form-field"><label>Компания</label><input type="text" name="Компания"></div>
           <div class="form-field"><label>Email</label><input type="email" name="Email" required></div>
           <div class="form-field"><label>Телефон</label><input type="tel" name="Телефон"></div>
-          <div class="form-field full"><label>Чертёж (PDF, STEP, DWG)</label><input type="file" name="Чертёж"></div>
+          <div class="form-field full"><label>Чертёж (PDF, STEP, DWG) — до 10 МБ</label><input type="file" name="Чертёж"></div>
           <div class="form-field full"><label>Комментарий</label><textarea name="Комментарий" rows="3"></textarea></div>
           <div class="form-field full">
             <button type="submit" class="btn btn-primary" id="quoteSubmit" style="align-self:flex-start;">Отправить заявку</button>
@@ -280,53 +281,41 @@
   }
 })();
 
-// Отправка заявки: письмо на почту через FormSubmit (без своего сервера)
-// плюс попытка продублировать в Telegram через собственную функцию
-// /api/notify (токен бота хранится в защищённых настройках Vercel,
-// а не в коде страницы). Если Telegram ещё не настроен — письмо всё
-// равно уходит, ошибка Telegram-части никак на это не влияет.
+// Отправка заявки: письмо на почту уходит настоящей отправкой формы
+// через FormSubmit (это нужно, чтобы вложенный чертёж действительно
+// дошёл — при "тихой" AJAX-отправке вложения не доставлялись).
+// После отправки FormSubmit возвращает пользователя обратно на эту
+// же страницу с меткой ?sent=1 — по ней мы показываем экран успеха.
+//
+// В Telegram дублируем через navigator.sendBeacon — это специальный
+// браузерный способ отправить короткий запрos, который гарантированно
+// долетит, даже если страница в этот момент уже уходит на FormSubmit.
 document.getElementById('quoteForm').addEventListener('submit', function (e) {
-  e.preventDefault();
   var form = e.target;
-  var submitBtn = document.getElementById('quoteSubmit');
-  var note = document.getElementById('qbFormNote');
 
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Отправка…';
+  document.getElementById('hf-next').value =
+    window.location.origin + window.location.pathname + '?sent=1';
 
-  var formData = new FormData(form);
-
-  fetch('https://formsubmit.co/ajax/ik_technology@mail.ru', {
-    method: 'POST',
-    headers: { 'Accept': 'application/json' },
-    body: formData
-  })
-    .then(function (res) {
-      if (!res.ok) throw new Error('FormSubmit error: ' + res.status);
-      return res.json();
-    })
-    .then(function () {
-      document.getElementById('quoteBuilder').style.display = 'none';
-      document.getElementById('formSuccess').classList.add('show');
-
-      // Дублируем в Telegram — необязательно для успеха заявки.
-      var payload = {};
-      formData.forEach(function (value, key) {
-        if (key !== 'Чертёж' && typeof value === 'string') payload[key] = value;
-      });
-      fetch('/api/notify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      }).catch(function () { /* Telegram не настроен или недоступен — не критично */ });
-    })
-    .catch(function () {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Отправить заявку';
-      note.textContent = 'Не получилось отправить автоматически. Напишите напрямую: sales@precision-mw.ru';
-      note.style.color = 'var(--copper-400)';
+  try {
+    var formData = new FormData(form);
+    var payload = {};
+    formData.forEach(function (value, key) {
+      if (key !== 'Чертёж' && typeof value === 'string' && value) payload[key] = value;
     });
+    navigator.sendBeacon('/api/notify', new Blob([JSON.stringify(payload)], { type: 'application/json' }));
+  } catch (err) { /* Telegram — необязательная часть, email всё равно уйдёт */ }
+
+  // preventDefault здесь намеренно НЕ вызывается — форма должна уйти
+  // обычным способом, чтобы файл-чертёж доехал вместе с письмом.
 });
+
+// Если мы вернулись сюда после реальной отправки (?sent=1 в адресе) —
+// сразу показываем экран успеха вместо конструктора.
+if (window.location.search.indexOf('sent=1') !== -1) {
+  document.getElementById('quoteBuilder').style.display = 'none';
+  document.getElementById('formSuccess').classList.add('show');
+  window.history.replaceState({}, '', window.location.pathname);
+}
 </script>
 <script src="reveal.js" defer></script>
 </body>
