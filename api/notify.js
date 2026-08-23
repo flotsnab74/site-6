@@ -24,11 +24,26 @@ export default async function handler(req, res) {
   }
 
   try {
-    const data = req.body || {};
+    // navigator.sendBeacon() и обычный fetch() могут доставить тело
+    // запроса по-разному (готовый объект, строка JSON или сырые байты
+    // Buffer) — приводим к обычному объекту в любом из этих случаев,
+    // чтобы разбор данных не зависел от способа отправки.
+    let data = req.body;
+    if (Buffer.isBuffer(data)) data = data.toString('utf-8');
+    if (typeof data === 'string') {
+      try { data = JSON.parse(data); } catch { data = {}; }
+    }
+    if (!data || typeof data !== 'object' || Array.isArray(data)) data = {};
+
     const lines = Object.keys(data)
-      .filter((k) => data[k])
+      .filter((k) => typeof data[k] === 'string' && data[k].trim())
       .map((k) => `${k}: ${data[k]}`);
-    const text = `📩 Новая заявка с сайта Precision Metalworks\n\n${lines.join('\n')}`;
+
+    let text = lines.length
+      ? `📩 Новая заявка с сайта Precision Metalworks\n\n${lines.join('\n')}`
+      : '📩 Новая заявка с сайта Precision Metalworks (детали не распознаны, проверьте почту)';
+
+    if (text.length > 3900) text = text.slice(0, 3900) + '…';
 
     const tgRes = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: 'POST',
@@ -41,12 +56,14 @@ export default async function handler(req, res) {
 
     if (!tgRes.ok) {
       const errText = await tgRes.text();
-      res.status(502).json({ error: 'Telegram API error', details: errText });
+      console.error('Telegram sendMessage failed:', tgRes.status, errText);
+      res.status(502).json({ error: 'Telegram API error', status: tgRes.status, details: errText });
       return;
     }
 
     res.status(200).json({ ok: true });
   } catch (err) {
+    console.error('notify.js error:', err);
     res.status(500).json({ error: err.message });
   }
 }
