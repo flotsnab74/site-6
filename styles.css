@@ -469,6 +469,10 @@ p { line-height: 1.6; margin: 0; }
   border: 1px solid var(--steel-200);
   color: var(--ink-900);
 }
+.section-dark .tag, .section-darkest .tag {
+  color: var(--white);
+  border-color: rgba(255,255,255,0.25);
+}
 
 .num-card .num{
   font-family: var(--font-mono);
