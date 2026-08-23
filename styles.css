@@ -298,6 +298,7 @@ p { line-height: 1.6; margin: 0; }
   height: 3px;
   background: var(--copper-500);
   transition: width 0.3s ease;
+  z-index: 2;
 }
 .card:hover {
   background: var(--steel-100);
@@ -306,8 +307,40 @@ p { line-height: 1.6; margin: 0; }
   z-index: 2;
 }
 .card:hover::before { width: 100%; }
-.num-card .num { transition: text-shadow 0.25s ease; }
+.num-card .num { position: relative; z-index: 1; transition: text-shadow 0.25s ease, color 0.25s ease; }
 .num-card:hover .num { text-shadow: 0 0 14px rgba(184,128,74,0.5); }
+
+/* ---------------------------------------------------------------- */
+/* Homepage technology grid — 7 cards, no leftover empty cell.       */
+/* 12-column base: row 1 (4 cards) spans 3 cols each = 12;           */
+/* row 2 (3 cards) spans 4 cols each = 12. Both rows fill the full   */
+/* width evenly and stay symmetric, whatever the card count.         */
+/* ---------------------------------------------------------------- */
+.tech-grid-7 { grid-template-columns: repeat(12, 1fr); }
+.tech-grid-7 .card:nth-child(-n+4) { grid-column: span 3; }
+.tech-grid-7 .card:nth-child(n+5) { grid-column: span 4; }
+
+/* Technology cards: on hover, a photo of the finished part fades in
+   behind the text (instead of a flat colour), with a dark gradient
+   baked in so the text stays readable. Photo comes from the
+   --tech-bg custom property set inline on each card. */
+.num-card { background-color: var(--white); }
+.num-card h3, .num-card p { position: relative; z-index: 1; transition: color 0.3s ease; }
+.num-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(180deg, rgba(23,26,28,.38), rgba(23,26,28,.86)), var(--tech-bg);
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+.num-card:hover::after { opacity: 1; }
+.num-card:hover h3 { color: #fff; }
+.num-card:hover p { color: rgba(255,255,255,.85); }
 .card .icon { color: var(--copper-500); margin-bottom: 20px; }
 .card h3 { font-size: 1.3rem; margin-bottom: 12px; color: var(--ink-900); }
 .card-photo{ width:100%; height:140px; object-fit:cover; border-radius:3px; margin-bottom:16px; display:block; }
@@ -602,6 +635,7 @@ p { line-height: 1.6; margin: 0; }
   .nav.open { transform: translateX(0); }
   .nav-toggle { display: block; }
   .card-grid { grid-template-columns: 1fr; }
+  .tech-grid-7 .card { grid-column: auto; }
   .process-grid { grid-template-columns: 1fr; gap: 28px; }
   .process-step:not(:last-child) { border-right: none; margin-right: 0; border-bottom: 1px dashed var(--graphite-700); padding-bottom: 24px; }
   .benefit-grid { grid-template-columns: 1fr; }
