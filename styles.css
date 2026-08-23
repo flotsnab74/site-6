@@ -569,6 +569,25 @@ p { line-height: 1.6; margin: 0; }
 .tech-block .tech-num{ font-family: var(--font-mono); color: var(--copper-500); font-size:.9rem; letter-spacing:.08em; }
 .tech-block h2{ font-size: clamp(1.5rem, 2.6vw, 2rem); margin:12px 0 16px; }
 .tech-block p.desc{ color: var(--mist-400); margin-bottom:20px; max-width:60ch; }
+
+/* Сравнение технологий + карточки выбора (capabilities.html) */
+.compare-wrap{ overflow-x:auto; margin: 4px 0 36px; border:1px solid var(--steel-200); border-radius:6px; }
+.compare-table{ width:100%; border-collapse:collapse; font-size:.9rem; min-width:760px; }
+.compare-table th, .compare-table td{ padding:14px 18px; text-align:left; border-bottom:1px solid var(--steel-200); vertical-align:top; }
+.compare-table thead th{ font-family:var(--font-mono); font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--mist-400); font-weight:500; background:var(--steel-100); }
+.compare-table tbody tr:last-child td{ border-bottom:none; }
+.compare-table tbody tr:hover{ background:var(--steel-100); }
+.compare-table td:first-child{ font-family:var(--font-display); font-weight:700; white-space:nowrap; }
+.compare-table a.row-link{ color:var(--ink-900); }
+.compare-table a.row-link:hover{ color:var(--copper-500); }
+
+.pick-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:8px; }
+.pick-card{ background:var(--steel-100); border-radius:6px; padding:16px 18px; border-left:3px solid var(--copper-500); }
+.pick-card h4{ font-family:var(--font-display); font-size:.92rem; margin:0 0 6px; }
+.pick-card p{ font-size:.83rem; color:var(--mist-400); margin:0; line-height:1.5; }
+
+.tech-more{ display:inline-block; margin-top:4px; font-family:var(--font-mono); font-size:.8rem; color:var(--copper-500); letter-spacing:.04em; }
+.tech-more:hover{ color:var(--copper-400); }
 .section-dark .tech-block p.desc, .section-darkest .tech-block p.desc{ color: var(--mist-200); }
 
 
