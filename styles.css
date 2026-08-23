@@ -586,6 +586,125 @@ p { line-height: 1.6; margin: 0; }
 .form-success h3{ font-size:1.3rem; margin-bottom:8px; }
 .form-success p{ color:var(--mist-200); }
 
+/* ---------------------------------------------------------------- */
+/* Конструктор ТЗ — interactive 4-step quote wizard (contacts.html). */
+/* Replaces a flat static form: pick technology -> material -> batch */
+/* size -> contact details, with a running progress indicator and a  */
+/* summary of choices before the final fields. Single-choice steps   */
+/* auto-advance on click so there's no extra "Next" click needed.    */
+/* ---------------------------------------------------------------- */
+.qb { color: var(--white); }
+.qb-progress {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 40px;
+}
+.qb-progress-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.qb-progress-step .qb-progress-bar {
+  height: 2px;
+  background: var(--graphite-700);
+  position: relative;
+  overflow: hidden;
+}
+.qb-progress-step .qb-progress-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--copper-500);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.qb-progress-step.is-done .qb-progress-bar::after,
+.qb-progress-step.is-active .qb-progress-bar::after { transform: scaleX(1); }
+.qb-progress-step.is-active .qb-progress-bar::after { transform-origin: left; }
+.qb-progress-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--mist-400);
+  transition: color 0.3s ease;
+}
+.qb-progress-step.is-active .qb-progress-label,
+.qb-progress-step.is-done .qb-progress-label { color: var(--copper-400); }
+
+.qb-panel { display: none; }
+.qb-panel.is-active { display: block; animation: qbFadeIn 0.35s ease; }
+@keyframes qbFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.qb-question { font-size: 1.3rem; margin-bottom: 24px; }
+
+.qb-options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.qb-options-list { display: flex; flex-direction: column; gap: 12px; }
+
+.qb-option {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  text-align: left;
+  color: var(--white);
+  background: var(--graphite-800);
+  border: 1px solid var(--graphite-700);
+  border-radius: 2px;
+  padding: 16px 18px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.qb-option span { font-size: 0.8rem; color: var(--mist-400); }
+.qb-option:hover { border-color: var(--copper-500); transform: translateY(-2px); }
+.qb-option.is-selected { border-color: var(--copper-500); background: rgba(184,128,74,0.12); }
+
+.qb-nav { margin-top: 24px; }
+.qb-back {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--mist-400);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 0;
+  transition: color 0.2s ease;
+}
+.qb-back:hover { color: var(--white); }
+
+.qb-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.qb-summary-item {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--copper-400);
+  background: rgba(184,128,74,0.1);
+  border: 1px solid rgba(184,128,74,0.3);
+  padding: 8px 14px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.qb-summary-item:hover { background: rgba(184,128,74,0.2); }
+.qb-summary-item .edit-mark { color: var(--mist-400); margin-left: 6px; }
+
+@media (max-width: 640px) {
+  .qb-options-grid { grid-template-columns: 1fr; }
+  .qb-progress-label { display: none; }
+}
+
 /* Featured capability cards (Услуги page) */
 .cap-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--steel-200); border:1px solid var(--steel-200); }
 .cap-card{ background:var(--white); }

@@ -64,19 +64,75 @@
 
 <section class="section section-darkest reveal">
   <div class="container" style="max-width:760px;">
-    <div class="section-head"><div class="dim-line no-rule">Заявка</div></div>
-    <form id="quoteForm" class="form-grid" onsubmit="return false;">
-      <div class="form-field"><label>Имя</label><input type="text" required></div>
-      <div class="form-field"><label>Компания</label><input type="text"></div>
-      <div class="form-field"><label>Email</label><input type="email" required></div>
-      <div class="form-field"><label>Телефон</label><input type="tel"></div>
-      <div class="form-field full"><label>Чертёж (PDF, STEP, DWG)</label><input type="file"></div>
-      <div class="form-field full"><label>Комментарий</label><textarea rows="4"></textarea></div>
-      <div class="form-field full">
-        <button type="submit" class="btn btn-primary" id="quoteSubmit" style="align-self:flex-start;">Отправить чертёж</button>
-        <p class="form-note">Или напишите напрямую: sales@precision-mw.ru</p>
+    <div class="section-head"><div class="dim-line no-rule">Конструктор ТЗ</div></div>
+
+    <div class="qb" id="quoteBuilder">
+      <div class="qb-progress">
+        <div class="qb-progress-step is-active" data-step="1"><div class="qb-progress-bar"></div><span class="qb-progress-label">01 Технология</span></div>
+        <div class="qb-progress-step" data-step="2"><div class="qb-progress-bar"></div><span class="qb-progress-label">02 Материал</span></div>
+        <div class="qb-progress-step" data-step="3"><div class="qb-progress-bar"></div><span class="qb-progress-label">03 Партия</span></div>
+        <div class="qb-progress-step" data-step="4"><div class="qb-progress-bar"></div><span class="qb-progress-label">04 Контакты</span></div>
       </div>
-    </form>
+
+      <div class="qb-panel is-active" data-panel="1">
+        <h3 class="qb-question">Какая технология нужна?</h3>
+        <div class="qb-options qb-options-grid">
+          <button type="button" class="qb-option" data-field="tech" data-value="Фрезерная обработка ЧПУ">Фрезерная обработка ЧПУ</button>
+          <button type="button" class="qb-option" data-field="tech" data-value="Токарная обработка ЧПУ">Токарная обработка ЧПУ</button>
+          <button type="button" class="qb-option" data-field="tech" data-value="Штамповка металла">Штамповка металла</button>
+          <button type="button" class="qb-option" data-field="tech" data-value="Гибка металла">Гибка металла</button>
+          <button type="button" class="qb-option" data-field="tech" data-value="Лазерная резка">Лазерная резка</button>
+          <button type="button" class="qb-option" data-field="tech" data-value="Сварка и сборка">Сварка и сборка</button>
+          <button type="button" class="qb-option" data-field="tech" data-value="Финишные покрытия">Финишные покрытия</button>
+          <button type="button" class="qb-option" data-field="tech" data-value="Не уверен, нужна консультация">Не уверен<span>Нужна консультация</span></button>
+        </div>
+      </div>
+
+      <div class="qb-panel" data-panel="2">
+        <h3 class="qb-question">Из какого материала деталь?</h3>
+        <div class="qb-options qb-options-grid">
+          <button type="button" class="qb-option" data-field="material" data-value="Алюминий">Алюминий</button>
+          <button type="button" class="qb-option" data-field="material" data-value="Нержавеющая сталь">Нержавеющая сталь</button>
+          <button type="button" class="qb-option" data-field="material" data-value="Углеродистая сталь">Углеродистая сталь</button>
+          <button type="button" class="qb-option" data-field="material" data-value="Латунь">Латунь</button>
+          <button type="button" class="qb-option" data-field="material" data-value="Медь">Медь</button>
+          <button type="button" class="qb-option" data-field="material" data-value="Титан">Титан</button>
+          <button type="button" class="qb-option" data-field="material" data-value="Инженерные пластики">Инженерные пластики</button>
+          <button type="button" class="qb-option" data-field="material" data-value="Другое / уточню с менеджером">Другое<span>Уточню с менеджером</span></button>
+        </div>
+        <div class="qb-nav"><button type="button" class="qb-back">← Назад</button></div>
+      </div>
+
+      <div class="qb-panel" data-panel="3">
+        <h3 class="qb-question">Какой объём партии?</h3>
+        <div class="qb-options qb-options-list">
+          <button type="button" class="qb-option" data-field="batch" data-value="1–10 шт">1–10 шт<span>Прототип или образец</span></button>
+          <button type="button" class="qb-option" data-field="batch" data-value="10–100 шт">10–100 шт<span>Малая партия</span></button>
+          <button type="button" class="qb-option" data-field="batch" data-value="100–1 000 шт">100–1 000 шт<span>Средняя партия</span></button>
+          <button type="button" class="qb-option" data-field="batch" data-value="1 000+ шт">1 000+ шт<span>Серийное производство</span></button>
+        </div>
+        <div class="qb-nav"><button type="button" class="qb-back">← Назад</button></div>
+      </div>
+
+      <div class="qb-panel" data-panel="4">
+        <h3 class="qb-question">Остался последний шаг</h3>
+        <div class="qb-summary" id="qbSummary"></div>
+        <form id="quoteForm" class="form-grid" onsubmit="return false;">
+          <div class="form-field"><label>Имя</label><input type="text" required></div>
+          <div class="form-field"><label>Компания</label><input type="text"></div>
+          <div class="form-field"><label>Email</label><input type="email" required></div>
+          <div class="form-field"><label>Телефон</label><input type="tel"></div>
+          <div class="form-field full"><label>Чертёж (PDF, STEP, DWG)</label><input type="file"></div>
+          <div class="form-field full"><label>Комментарий</label><textarea rows="3"></textarea></div>
+          <div class="form-field full">
+            <button type="submit" class="btn btn-primary" id="quoteSubmit" style="align-self:flex-start;">Отправить заявку</button>
+            <p class="form-note">Или напишите напрямую: sales@precision-mw.ru</p>
+          </div>
+        </form>
+        <div class="qb-nav"><button type="button" class="qb-back">← Назад</button></div>
+      </div>
+    </div>
+
     <div class="form-success" id="formSuccess">
       <h3>Заявка принята</h3>
       <p>Демо-форма: письмо реально никуда не отправлено. Чтобы форма работала по-настоящему, нужно подключить сервис отправки (обсудим отдельно).</p>
@@ -130,9 +186,73 @@
   });
 </script>
 <script>
+(function () {
+  var qb = document.getElementById('quoteBuilder');
+  if (!qb) return;
+
+  var state = { tech: null, material: null, batch: null };
+  var panels = qb.querySelectorAll('.qb-panel');
+  var progressSteps = qb.querySelectorAll('.qb-progress-step');
+
+  function goToStep(n) {
+    panels.forEach(function (p) {
+      p.classList.toggle('is-active', p.dataset.panel === String(n));
+    });
+    progressSteps.forEach(function (s) {
+      var stepNum = parseInt(s.dataset.step, 10);
+      s.classList.toggle('is-active', stepNum === n);
+      s.classList.toggle('is-done', stepNum < n);
+    });
+    if (n === 4) renderSummary();
+  }
+
+  // Один клик по варианту — выбор фиксируется и конструктор сам
+  // переходит к следующему шагу, без лишней кнопки "Далее".
+  qb.querySelectorAll('.qb-option').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var field = btn.dataset.field;
+      var value = btn.dataset.value;
+      state[field] = value;
+
+      var group = btn.closest('.qb-panel').querySelectorAll('.qb-option[data-field="' + field + '"]');
+      group.forEach(function (b) { b.classList.toggle('is-selected', b === btn); });
+
+      var currentPanel = parseInt(btn.closest('.qb-panel').dataset.panel, 10);
+      setTimeout(function () { goToStep(currentPanel + 1); }, 300);
+    });
+  });
+
+  qb.querySelectorAll('.qb-back').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var currentPanel = parseInt(btn.closest('.qb-panel').dataset.panel, 10);
+      goToStep(currentPanel - 1);
+    });
+  });
+
+  // На последнем шаге показываем короткую сводку выбранного —
+  // клик по любому пункту сводки возвращает назад и даёт поправить.
+  function renderSummary() {
+    var summary = document.getElementById('qbSummary');
+    var labels = { tech: 'Технология', material: 'Материал', batch: 'Партия' };
+    var order = [['tech', 1], ['material', 2], ['batch', 3]];
+    var html = '';
+    order.forEach(function (pair) {
+      var field = pair[0], stepNum = pair[1];
+      if (state[field]) {
+        html += '<button type="button" class="qb-summary-item" data-jump="' + stepNum + '">' +
+          labels[field] + ': ' + state[field] + '<span class="edit-mark">✎</span></button>';
+      }
+    });
+    summary.innerHTML = html;
+    summary.querySelectorAll('.qb-summary-item').forEach(function (chip) {
+      chip.addEventListener('click', function () { goToStep(parseInt(chip.dataset.jump, 10)); });
+    });
+  }
+})();
+
 document.getElementById('quoteForm').addEventListener('submit', function(e){
   e.preventDefault();
-  this.style.display = 'none';
+  document.getElementById('quoteBuilder').style.display = 'none';
   document.getElementById('formSuccess').classList.add('show');
 });
 </script>
