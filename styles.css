@@ -117,6 +117,7 @@ p { line-height: 1.6; margin: 0; }
 .logo span { color: var(--copper-400); }
 .nav { display: flex; align-items: center; gap: 15px; }
 .nav a {
+  position: relative;
   font-size: 0.83rem;
   font-weight: 500;
   color: var(--mist-200);
@@ -124,6 +125,18 @@ p { line-height: 1.6; margin: 0; }
   transition: color 0.15s ease;
 }
 .nav a:hover, .nav a.active { color: var(--white); }
+.nav a:not(.nav-cta)::before {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--copper-500);
+  transition: width 0.25s ease, left 0.25s ease;
+}
+.nav a:not(.nav-cta):hover::before,
+.nav a:not(.nav-cta).active::before { width: 100%; left: 0; }
 .nav-dropdown { white-space: nowrap; }
 .nav-cta {
   background: var(--copper-500);
@@ -172,8 +185,24 @@ p { line-height: 1.6; margin: 0; }
   cursor: pointer;
   transition: all 0.15s ease;
 }
-.btn-primary { background: var(--copper-500); color: var(--graphite-950); }
-.btn-primary:hover { background: var(--copper-400); }
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background: var(--copper-500);
+  color: var(--graphite-950);
+}
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--copper-400);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+  z-index: -1;
+}
+.btn-primary:hover::before { transform: scaleX(1); }
 .btn-ghost { border-color: rgba(255,255,255,0.35); color: var(--white); }
 .btn-ghost:hover { border-color: var(--white); }
 .btn-ghost.on-light { border-color: var(--graphite-700); color: var(--ink-900); }
@@ -185,7 +214,7 @@ p { line-height: 1.6; margin: 0; }
 /* "data plate" spec card in the corner — like a plate riveted onto a    */
 /* machine, not a UI overlay.                                            */
 /* -------------------------------------------------------------------- */
-.hero-glow{ position:relative; overflow:hidden; min-height:660px; display:flex; align-items:center; background: var(--graphite-800); width:100%; }
+.hero-glow{ position:relative; overflow:hidden; min-height:660px; display:flex; align-items:center; background: var(--graphite-800); width:100%; padding-bottom:160px; }
 .hero-glow video{
   position:absolute; top:0; right:0; bottom:0; left:0;
   width:100%; height:100%; min-width:100%; min-height:100%;
