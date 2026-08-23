@@ -313,10 +313,14 @@ p { line-height: 1.6; margin: 0; }
   border: 1px solid var(--steel-200);
 }
 .card {
+  display: block;
   background: var(--white);
   padding: 34px 30px;
   position: relative;
   overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
   transition: background 0.15s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 .card::before {
@@ -354,7 +358,8 @@ p { line-height: 1.6; margin: 0; }
    baked in so the text stays readable. Photo comes from the
    --tech-bg custom property set inline on each card. */
 .num-card { background-color: var(--white); }
-.num-card h3, .num-card p, .num-card a { position: relative; z-index: 1; transition: color 0.3s ease; }
+.num-card h3, .num-card p, .num-card .card-link { position: relative; z-index: 1; transition: color 0.3s ease; }
+.num-card .card-link { display: block; margin-top: 12px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--copper-500); letter-spacing: 0.04em; }
 .num-card::after {
   content: "";
   position: absolute;
@@ -370,7 +375,7 @@ p { line-height: 1.6; margin: 0; }
 .num-card:hover::after { opacity: 1; }
 .num-card:hover h3 { color: #fff; }
 .num-card:hover p { color: rgba(255,255,255,.85); }
-.num-card:hover a { color: var(--copper-300, #dba876); }
+.num-card:hover .card-link { color: var(--copper-300, #dba876); }
 .card .icon { color: var(--copper-500); margin-bottom: 20px; }
 .card h3 { font-size: 1.3rem; margin-bottom: 12px; color: var(--ink-900); }
 .card-photo{ width:100%; height:140px; object-fit:cover; border-radius:3px; margin-bottom:16px; display:block; }
@@ -767,9 +772,34 @@ p { line-height: 1.6; margin: 0; }
 .service-icon-card p{ color:var(--mist-400); font-size:.85rem; }
 
 
-/* Service detail page banner image */
+/* Service detail page banner image (legacy, kept for any page not yet
+   migrated to .service-hero) */
 .service-banner{ height:320px; overflow:hidden; }
 .service-banner img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+/* Service detail page hero — photo fills the whole block, text sits on
+   top with a bottom-heavy gradient so the image stays visible up top
+   while the title stays readable. Replaces the old pattern of a solid
+   dark header strip followed by a separate, awkwardly short photo. */
+.service-hero {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: flex-end;
+  padding: 48px 0 40px;
+  background-image: linear-gradient(180deg, rgba(23,26,28,.18) 0%, rgba(23,26,28,.55) 60%, rgba(23,26,28,.92) 100%), var(--hero-bg);
+  background-size: cover;
+  background-position: center;
+  color: var(--white);
+}
+.service-hero .eyebrow { text-shadow: 0 1px 10px rgba(0,0,0,.6); }
+.service-hero h1 {
+  max-width: 26ch;
+  font-size: clamp(1.9rem,3.6vw,2.8rem);
+  text-shadow: 0 2px 18px rgba(0,0,0,.55), 0 1px 2px rgba(0,0,0,.7);
+  margin: 10px 0 0;
+}
+.service-hero .lead { color: var(--mist-200); text-shadow: 0 1px 10px rgba(0,0,0,.6); max-width: 60ch; margin-top: 14px; }
 
 
 /* Placeholder notice (visible only in this demo build) */
@@ -831,7 +861,7 @@ p { line-height: 1.6; margin: 0; }
 
 @media (max-width:860px){ .service-icon-grid{ grid-template-columns:repeat(2,1fr); } }
 
-@media (max-width:860px){ .service-banner{ height:220px; } }
+@media (max-width:860px){ .service-banner{ height:220px; } .service-hero{ min-height:320px; padding:32px 0 28px; } .service-hero h1{ font-size:clamp(1.6rem,7vw,2.2rem); } }
 
 @media (max-width: 860px) {
   .nav, .nav a, .nav-dropdown { white-space: normal; }
