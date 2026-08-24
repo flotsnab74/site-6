@@ -7,7 +7,7 @@
   function animate(el) {
     var to = parseFloat(el.getAttribute('data-count-to'));
     var suffix = el.getAttribute('data-count-suffix') || '';
-    var duration = 1100;
+    var duration = parseFloat(el.getAttribute('data-count-duration')) || 1100;
     var start = null;
 
     function step(ts) {
