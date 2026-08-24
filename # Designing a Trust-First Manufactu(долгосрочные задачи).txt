@@ -152,3 +152,26 @@ The goal of a technology-comparison page is to help a buyer **match their part t
 - **Welding tolerance is code-driven** (AWS D1.1 / ISO 13920), not a single marketplace "±X" number — present it differently from the machining/forming rows.
 - **The China-to-Russia payment/sanctions environment is fast-moving and sensitive.** Public-website messaging about payments/logistics should be careful, current, and not overpromise; verify the current banking-corridor status before making specific claims.
 - **Certifications should be current and truthful.** Displaying an expired or unheld certification is a severe trust-breaker; only show what is valid and verifiable.
+---
+
+## Заметки от 24.08.2026 (сессия доработки материалов/фото/сравнения)
+
+### Референс дизайна: фоновое фото в CTA-баннере (зафиксировано, не реализовано)
+Пользователь показал скриншот сайта-конкурента (3dpath.eu) — у них между блоками услуг встроен
+полноэкранный тёмный баннер с фоновым фото цеха (затемнённое, размытое) и крупным заголовком
+"Ordering parts has never been easier" + большая CTA-кнопка поверх фото. Сейчас на нашем сайте
+`.cta-band` — просто сплошной тёмный фон без фото. Идея: добавить опциональное фоновое фото в
+`.cta-band` (или в отдельные CTA-секции на ключевых страницах — capabilities.html, services.html,
+index.html) в похожей стилистике: фото цеха/производства + градиент-затемнение + текст поверх.
+Нужно: 1-2 качественных фото реального цеха/линии (не стоковых) от пользователя.
+Статус: идея зафиксирована, ждёт (а) решения, на каких страницах внедрять, (б) фото от пользователя.
+
+### Галерея/примеры работ — предложены варианты, ждём решения пользователя
+Варианты изложены в чате 24.08.2026. Блокер для реализации любого варианта — нет реальных фото
+готовых деталей/кейсов, только фото сырья и заготовок. Нужны от пользователя.
+
+### Наши преимущества vs заказ на заводах в РФ — черновой список (зафиксировано)
+Черновой список изложен в чате 24.08.2026. Требует ревью пользователя перед тем, как выносить
+на сайт (особенно пункт про цену — сильно зависит от объёма партии и текущего курса, нельзя
+давать голую цифру без оговорок; пункт про загруженность российских заводов — стоит перепроверить
+актуальность перед публикацией как факт на сайте).

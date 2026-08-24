@@ -378,7 +378,7 @@ p { line-height: 1.6; margin: 0; }
 .num-card:hover .card-link { color: var(--copper-300, #dba876); }
 .card .icon { color: var(--copper-500); margin-bottom: 20px; }
 .card h3 { font-size: 1.3rem; margin-bottom: 12px; color: var(--ink-900); }
-.card-photo{ width:100%; height:140px; object-fit:cover; border-radius:3px; margin-bottom:16px; display:block; }
+.card-photo{ width:100%; height:190px; object-fit:cover; border-radius:3px; margin-bottom:16px; display:block; }
 .card p { color: var(--mist-400); font-size: 0.95rem; margin-bottom: 16px; }
 .card a { font-family: var(--font-mono); font-size: 0.8rem; color: var(--copper-500); letter-spacing: 0.04em; }
 
