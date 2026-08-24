@@ -94,9 +94,9 @@
   <div class="spec-strip">
     <div class="container">
       <div class="spec-grid">
-        <a href="contacts.html" class="spec-cell is-link"><div class="spec-value">24 ч</div><div class="spec-label">Ответ на запрос</div></a>
+        <a href="contacts.html" class="spec-cell is-link"><div class="spec-value" data-count-to="24" data-count-suffix=" ч">24 ч</div><div class="spec-label">Ответ на запрос</div></a>
         <div class="spec-cell"><div class="spec-value">5–100 000+</div><div class="spec-label">Размер партии — от образца до серии</div></div>
-        <a href="quality.html" class="spec-cell is-link"><div class="spec-value">100%</div><div class="spec-label">Партий с протоколом контроля</div></a>
+        <a href="quality.html" class="spec-cell is-link"><div class="spec-value" data-count-to="100" data-count-suffix="%">100%</div><div class="spec-label">Партий с протоколом контроля</div></a>
         <div class="spec-cell"><div class="spec-value">RU</div><div class="spec-label">Инженерное сопровождение на русском</div></div>
         <a href="delivery.html" class="spec-cell is-link"><div class="spec-value">Поставка</div><div class="spec-label">Готовые детали в РФ</div></a>
       </div>
@@ -170,6 +170,27 @@
   </div>
 </section>
 
+<section class="section section-dark reveal">
+  <div class="container">
+    <div class="section-head" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+      <div>
+        <div class="dim-line no-rule">Наши работы</div>
+        <h2>Материалы и детали, с которыми мы работаем</h2>
+        <p style="color:var(--mist-400);margin-top:8px;max-width:60ch;">Живые фото из процесса и производства — не стоковые изображения. Кейсы с готовыми проектами клиентов добавим по мере согласования.</p>
+      </div>
+      <a href="gallery.html" class="btn btn-ghost">Все фото →</a>
+    </div>
+    <div class="gallery-grid">
+      <a href="gallery.html" class="gallery-card"><img loading="lazy" decoding="async" src="assets/tech-fasteners.jpg" alt="Изготовление крепежа на заказ"><span class="gallery-caption"><span class="k">Изготовление</span><span class="v">Крепёж на заказ</span></span></a>
+      <a href="gallery.html" class="gallery-card"><img loading="lazy" decoding="async" src="assets/quality-hero.jpg" alt="Контроль качества по чертежу"><span class="gallery-caption"><span class="k">Процесс</span><span class="v">Контроль каждой детали</span></span></a>
+      <a href="gallery.html" class="gallery-card"><img loading="lazy" decoding="async" src="assets/material-titanium.jpg" alt="Титан"><span class="gallery-caption"><span class="k">Материал</span><span class="v">Титан</span></span></a>
+      <a href="gallery.html" class="gallery-card"><img loading="lazy" decoding="async" src="assets/material-copper.jpg" alt="Медь"><span class="gallery-caption"><span class="k">Материал</span><span class="v">Медь</span></span></a>
+      <a href="gallery.html" class="gallery-card"><img loading="lazy" decoding="async" src="assets/material-brass.jpg" alt="Латунь"><span class="gallery-caption"><span class="k">Материал</span><span class="v">Латунь</span></span></a>
+      <a href="gallery.html" class="gallery-card"><img loading="lazy" decoding="async" src="assets/material-aluminum.jpg" alt="Алюминий"><span class="gallery-caption"><span class="k">Материал</span><span class="v">Алюминий</span></span></a>
+    </div>
+  </div>
+</section>
+
 <section class="section section-darkest">
   <div class="container">
     <div class="sticky-process">
@@ -224,6 +245,7 @@
           <li><a href="capabilities.html">Технологии</a></li>
           <li><a href="services.html">Услуги</a></li>
           <li><a href="materials.html">Материалы</a></li>
+          <li><a href="gallery.html">Наши работы</a></li>
           <li><a href="products.html">Продукция</a></li>
           <li><a href="quality.html">Контроль качества</a></li>
           <li><a href="industries.html">Отрасли</a></li>
@@ -263,5 +285,6 @@
 </script>
 <script src="reveal.js" defer></script>
 <script src="sticky-process.js" defer></script>
+<script src="counter.js" defer></script>
 </body>
 </html>
